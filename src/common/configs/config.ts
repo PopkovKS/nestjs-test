@@ -7,15 +7,15 @@ const config: Config = {
   cors: {
     enabled: true,
   },
-  //   swagger: {
-  //     enabled: true,
-  //     title: "Nestjs FTW",
-  //     description: "The nestjs API description",
-  //     version: "1.5",
-  //     path: "api",
-  //   },
+    swagger: {
+      enabled: true,
+      title: "API for Blog",
+      description: "The blog API",
+      version: "1.0",
+      path: "api",
+    },
   security: {
-    expiresIn: "2m",
+    expiresIn: "1d",
     refreshIn: "7d",
     bcryptSaltOrRound: 10,
   },

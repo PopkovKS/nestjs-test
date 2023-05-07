@@ -10,6 +10,7 @@ import { Prisma } from '@prisma/client';
 import { PrismaService } from 'nestjs-prisma';
 import { ConfigService } from '@nestjs/config';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { SecurityConfig } from 'src/common/configs/config.interface';
 
 @Injectable()
 export class AuthService {
@@ -69,15 +70,20 @@ export class AuthService {
     return this.usersService.update(Number(userId), { refreshToken: null });
   }
 
+  
+
   async getTokens(payload) {
+
+    const securityConfig = this.configService.get<SecurityConfig>("security");
+
     const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(payload, {
         secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
-        expiresIn: '1d',
+        expiresIn: securityConfig.expiresIn,
       }),
       this.jwtService.signAsync(payload, {
         secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-        expiresIn: '7d',
+        expiresIn: securityConfig.refreshIn,
       }),
     ]);
 
