@@ -1,6 +1,6 @@
 module.exports = {
     apps : [{
-        name   : "app1",
+        name   : "app2",
         script : "./dist/main.js",
         autorestart: true
     }]
