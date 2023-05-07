@@ -36,7 +36,7 @@ export class BlogController {
 
   @UseGuards(AccessTokenGuard)
   @Get()
-  @ApiOperation({ summary: "Getting all blogs" })
+  @ApiOperation({ summary: "Getting all blogs with pagination" })
   @ApiResponse({ status: 200, type: CreateBlogDto })
   findAll(@Request() req, @Query("skip") skip: string) {
     return this.blogService.findAll(req.user.id, +skip);
@@ -54,6 +54,7 @@ export class BlogController {
   @Patch(":id")
   @ApiOperation({ summary: "Updates a blog with specified id" })
   @ApiResponse({ status: 200, type: CreateBlogDto })
+  @ApiResponse({ status: 403, description: "Нет прав на редактирование записи" })
   async update(
     @Param("id") id: string,
     @Body() updateBlogDto: UpdateBlogDto,
@@ -71,6 +72,7 @@ export class BlogController {
   @Delete(":id")
   @ApiOperation({ summary: "Deletes a blog with specified id" })
   @ApiResponse({ status: 200, type: CreateBlogDto })
+  @ApiResponse({ status: 403, description: "Нет прав на удаление записи" })
   async remove(@Param("id") id: string, @Request() req) {
     const foudnBlog = await this.blogService.findOne(+id);
     if (req.user.id == foudnBlog?.userId) {
