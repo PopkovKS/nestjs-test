@@ -17,8 +17,10 @@ export class BlogService {
   }
 
   async findAll(userId: number, skip: number) {
+    if (!skip) {
+      skip = 0;
+    }
     const [blogs, total] = await this.prisma.$transaction([
-
       this.prisma.blog.findMany({
         skip: skip,
         take: 20,
@@ -38,7 +40,7 @@ export class BlogService {
           updatedAt: true,
         },
       }),
-      
+
       this.prisma.blog.count({
         where: {
           userId,
