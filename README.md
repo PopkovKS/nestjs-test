@@ -3,21 +3,31 @@
 
 [Nest](https://github.com/nestjs/nest).js backend API with JWT Authentication (Prisma, PostgreSQL).
 
-## Installation
+## Swagger documentation
 
-```bash
-$ yarn install
-```
+`http://195.2.81.137:3000/api#/`
 
-## Running the app
 
-```bash
-# development
-$ yarn run start
+## Blog API
 
-# watch mode
-$ yarn run start:dev
+ `http://195.2.81.137:3000/api`
 
-# production mode
-$ yarn run start:prod
-```
+Email: `test@test.ru`
+Password: `test`
+
+
+## Pgweb(test-db)
+
+`http://195.2.81.137:8085`
+
+
+
+
+
+#### Локальная раработка
+
+1. Клонируем репозиторий
+2. Устанавливаем зависимости: `yarn`
+3. Скопировать корневой файл `env-example` в созданный `.env`
+4. В корневом файле `.env` сгенерировать JWT
+3. Запустить development: `yarn start`
